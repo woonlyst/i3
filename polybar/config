@@ -1,24 +1,63 @@
 [colors]
-background = ${xrdb:color0:#222}
-background-alt = #444
+;background = ${xrdb:color0:#222}
+;background-alt = #444
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #FFF
-secondary = #00FFFF
-alert = #B2535B
+;foreground = #dfdfdf
+;foreground-alt = #555
+;primary = #FFF
+;secondary = #00FFFF
+;alert = #B2535B
 
+;== main colors ==;
 
+;почти чёрный
+background = #5c5c5c
+foreground = #ffffff
+
+;белый
+foreground-alt = #5c5c5c
+
+;серый
+background-alt = #1F1F1F
+
+;== shades ==;
+
+;темный синий
+shade1 = #0D47A1
+
+;голубой
+shade2 = #4FA1FF
+
+;фиолетовый
+shade3 = #B354D1
+
+;светло-желтый
+shade4 = #FDECC1
+
+;красный
+shade5 = #F22303
+
+;зелёный
+shade6 = #27ff00
+
+;оранжевый
+shade7 = #FF9100
+
+;розовый
+shade8 = #FF33C2
+
+;слабо-зеленый
+shade9 = #B0FFBC
 
 ;------------;
 ; TOPBAR    ;
 ;------------;
 
 [bar/PolybarTop]
-line-size = 1
+line-size = 0
 line-color = #f00
 
-border-size = 1
+border-size = 0
 border-color = #00000000
 
 ;------------;
@@ -26,14 +65,15 @@ border-color = #00000000
 ;------------;
 
 width = 100%
-height = 20
+height = 30
 offset-y = 0
 offset-x = 0
 
 border-top-size = 5
 border-bottom-size = 5
-border-right-size = 5
-border-left-size = 5
+border-right-size = 20
+border-left-size = 20
+
 
 ;----------;
 ; LOCATION ;
@@ -70,17 +110,17 @@ alert = #B2535B
 ; MISCELLANEOUS ;
 ;---------------;
 
-radius = 5.0
+radius = 15.0
 fixed-center = true
-padding-left = 1
-padding-right = 1
+padding-left = 0
+padding-right = 0
 
 module-margin-left = 0
 module-margin-right = 0
 
-modules-left = powermenu pulseaudio
+modules-left = launcher i3
 modules-center = xwindow
-modules-right = date
+modules-right = xkeyboard cpu memory cputemp date sysmenu
 
 tray-position = hidden
 tray-padding =2 
@@ -101,7 +141,7 @@ tray-padding =2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-separator = %{F#A4A4A4}  |  %{F}
+;separator = %{F#A4A4A4}  |  %{F}
 
 locale = ru_RU.UTF-8 
 
@@ -154,14 +194,6 @@ font-4 = Weather Icons:size=10;2
 ; COLORS ;
 ;--------;
 
-background = 0
-background-alt = #555
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #E1D4AE
-secondary = #e60053
-alert = #B2535B
-
 ;---------------;
 ; MISCELLANEOUS ;
 ;---------------;
@@ -178,7 +210,7 @@ separator = %{F#A4A4A4}  |  %{F}
 
 locale = ru_RU.UTF-8 
 
-modules-left = i3
+modules-left = launcher i3
 modules-center = weather
 modules-right = xkeyboard filesystem memory cpu cputemp temperature
 
@@ -190,9 +222,11 @@ modules-right = xkeyboard filesystem memory cpu cputemp temperature
 
 [module/xwindow]
 type = internal/xwindow
-format-foreground = ${colors.primary}
+format-foreground = ${colors.foreground}
+;format-background = ${colors.shade2}
 label = %title%
 label-maxlen = 80
+format-padding = 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -201,16 +235,14 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
+format-prefix-foreground = ${colors.foreground}
+format-foreground = ${colors.foreground}
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+format-background = ${colors.shade2}
+format-padding = 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -235,51 +267,59 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = false
 wrapping-scroll = false
+format-padding = 2
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-default = 
+format-background = ${colors.shade4}
+format-foreground = ${colors.background}
+
+ws-icon-0 = ;
+ws-icon-1 = ;
+ws-icon-2 = ;
+ws-icon-3 = ;
+ws-icon-4 = ;
+ws-icon-5 = ;
+ws-icon-6 = ;
+ws-icon-7 = ;
+ws-icon-8 = ;
+ws-icon-9 = ;
+ws-icon-default = ;
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000000
-label-mode-background = ${colors.primary}
+label-mode-background = ${colors.shade4}
 
 ; focused = Active workspace on focused monitor
-label-focused = %name%
-label-focused-background = 
-label-focused-foreground = ${colors.secondary}
-label-focused-underline = ${colors.secondary}
+label-focused = 
+;label-focused = 
+label-focused-background = ${colors.shade4}
+label-focused-foreground = ${colors.background}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
+label-unfocused = 
 label-unfocused-padding = 2
-label-unfocused-foreground = ${colors.primary}
-label-unfocused-underline = 
+label-unfocused-foreground = ${colors.background}
+label-unfocused-background = ${colors.shade4}
+
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %name%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
+label-visible = 
+label-visible-background = ${colors.shade4}
+label-visible-foreground = ${colors.background}
+
+label-empty = 
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %name%
-label-urgent-background = ${colors.alert}
+label-urgent = 
+label-urgent-background = ${colors.shade5}
+label-urgent-foreground = ${colors.background}
 label-urgent-padding = 2
 
 ; Separator in between workspaces
-label-separator = |
+;label-separator = |
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -300,23 +340,25 @@ label-song-ellipsis = true
 
 [module/cpu]
 type = internal/cpu
-interval = 2
+interval = 1
 format-prefix = "  "
-format-prefix-foreground = ${colors.primary}
-format-underline = ${colors.secondary}
+format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage:2%%
-label-foreground = ${colors.primary}
+label-foreground = ${colors.foreground-alt}
+format-background = ${colors.shade7}
+format-padding = 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [module/memory]
 type = internal/memory
-interval = 2
+interval = 1
 format-prefix = "  "
 format-prefix-foreground = ${colors.primary}
-format-underline = ${colors.secondary}
 label = %percentage_used%%
 label-foreground = ${colors.primary}
+format-padding = 2
+format-background = ${colors.shade8}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -374,11 +416,13 @@ time = " %A, %e %B, %H:%M:%S"
 time-alt = %H:%M:%S
 
 format-prefix =   
-format-prefix-foreground = ${colors.primary}
-format-underline = ${colors.secondary}
-format-foreground = ${colors.primary}
+format-prefix-foreground = ${colors.foreground}
+format-foreground = ${colors.foreground}
+format-background = ${colors.shade3}
 
 label = %date% %time%
+
+format-padding = 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -391,7 +435,7 @@ format-volume-underline = ${colors.secondary}
 label-volume = %percentage%%
 label-volume-foreground = ${colors.primary}
 
-label-muted =   mudo
+label-muted =   mute
 label-muted-foreground = ${colors.secondary}
 
 bar-volume-width = 10
@@ -516,16 +560,20 @@ exec = sensors | grep --max-count=1 "CPU Temperature:" | awk '{print substr($0,2
 interval = 1
 
 label = " %output%°C"
-format-underline = ${colors.secondary}
+
+format-padding = 2
+
+format-background = ${colors.shade9}
+format-foreground = ${colors.foreground-alt}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [module/powermenu]
 type = custom/menu
 expand-right = true
-format-spacing = 1
+format-spacing = 0
 
-label-open = "  "
+label-open = " "
 label-open-foreground = ${colors.primary}
 label-close = "  cancel "
 label-close-foreground = ${colors.secondary}
@@ -534,7 +582,7 @@ label-separator-foreground = ${colors.primary}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
-menu-0-1 = power off
+menu-0-1 = poweroff
 menu-0-1-exec = menu-open-2
 
 menu-1-0 = cancel
@@ -542,7 +590,7 @@ menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
 menu-1-1-exec = sudo reboot
 
-menu-2-0 = power off
+menu-2-0 = poweroff
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
@@ -557,6 +605,41 @@ label-font = 5
 format-underline = ${colors.secondary}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/launcher]
+type = custom/text
+;content =  Gentoo
+content =  Arch
+
+; "content" has the same properties as "format-NAME"
+content-background = ${colors.shade6}
+content-foreground = ${colors.background}
+content-padding = 3
+format-padding = 2
+
+; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c $COMMAND"
+click-left = ~/.config/polybar/scripts/launcher.sh &
+;;click-middle = ~/.config/polybar/shades/scripts/launcher-full
+click-right = ~/.config/polybar/scripts/color-switch.sh &
+
+; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c $COMMAND"
+;;scroll-up = ~/.config/polybar/shades/scripts/launcher.sh &
+;;scroll-down = ~/.config/polybar/shades/scripts/color-switch.sh &
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/sysmenu]
+type = custom/text
+content = 
+
+content-background = ${colors.shade6}
+content-foreground = ${colors.background}
+content-padding = 2
+format-padding = 2
+
+click-left = ~/.config/polybar/scripts/powermenu.sh &
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [settings]
 screenchange-reload = true
