@@ -111,13 +111,13 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: "
-set $ws2 "2: "
-set $ws3 "3: "
-set $ws4 "4: "
-set $ws5 "5: "
-set $ws6 "6: "
-set $ws7 "7: "
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -188,9 +188,9 @@ bindsym $mod+r mode "resize"
 
 #Gaps
 
-gaps inner 2
-gaps outer 2
-smart_gaps on
+gaps inner 10
+gaps outer 10
+#smart_gaps on
 smart_borders on
 
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -242,7 +242,10 @@ bindsym $mod+F2 exec pcmanfm
 exec_always --no-startup-id feh --bg-fill ~/Wall/wall2.jpg
 
 # Picom
-exec_always --no-startup-id compton -f --config ~/.config/compton/compton.conf
+exec_always --no-startup-id picom -f --config ~/.config/picom/picom.conf
+
+# Dunst
+exec_always --no-startup-id dunst
 
 # Assign programs to workspaces
 for_window [class="firefox"] move to workspace $ws2
@@ -250,10 +253,10 @@ for_window [class="firefox"] move to workspace $ws2
 focus_follows_mouse no
 
 # Polybar launch script
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
 #exec_always --no-startup-id polybar example
-
+#exec_always --no-startup-id polybar -q main -c /home/woonlyst/.config/polybar/shades/launch.sh
+exec_always --no-startup-id /home/woonlyst/.config/polybar/launch.sh
 
 #Keymaps
-
 exec --no-startup-id setxkbmap "us,ru" ",winkeys" 'grp:alt_shift_toggle'
